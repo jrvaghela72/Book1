@@ -1,4 +1,14 @@
-﻿  Skipping... (no relevant changes detected)
-  MainFrame.cpp
+﻿  MainFrame.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+c:\users\jrvag\documents\visual studio 2015\projects\book1\book1\resource.h(10): warning C4005: 'ID_EDIT_UNDO': macro redefinition
+  c:\program files (x86)\microsoft visual studio 14.0\vc\atlmfc\include\afxres.h(260): note: see previous definition of 'ID_EDIT_UNDO'
+c:\users\jrvag\documents\visual studio 2015\projects\book1\book1\resource.h(11): warning C4005: 'ID_EDIT_REDO': macro redefinition
+  c:\program files (x86)\microsoft visual studio 14.0\vc\atlmfc\include\afxres.h(261): note: see previous definition of 'ID_EDIT_REDO'
+c:\users\jrvag\documents\visual studio 2015\projects\book1\book1\resource.h(12): warning C4005: 'ID_FILE_NEW': macro redefinition
+  c:\program files (x86)\microsoft visual studio 14.0\vc\atlmfc\include\afxres.h(214): note: see previous definition of 'ID_FILE_NEW'
+c:\users\jrvag\documents\visual studio 2015\projects\book1\book1\resource.h(13): warning C4005: 'ID_FILE_OPEN': macro redefinition
+  c:\program files (x86)\microsoft visual studio 14.0\vc\atlmfc\include\afxres.h(215): note: see previous definition of 'ID_FILE_OPEN'
+c:\users\jrvag\documents\visual studio 2015\projects\book1\book1\resource.h(14): warning C4005: 'ID_FILE_SAVE': macro redefinition
+  c:\program files (x86)\microsoft visual studio 14.0\vc\atlmfc\include\afxres.h(217): note: see previous definition of 'ID_FILE_SAVE'
   Book1.vcxproj -> C:\Users\jrvag\documents\visual studio 2015\Projects\Book1\Debug\Book1.exe
   Book1.vcxproj -> C:\Users\jrvag\documents\visual studio 2015\Projects\Book1\Debug\Book1.pdb (Full PDB)

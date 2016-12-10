@@ -1,9 +1,28 @@
 #include "MainFrame.h"
-
+#include <winuser.h>
+#include <winuser.h>
+#include <winuser.h>
 //constructor
 CMainFrame::CMainFrame()
 {
-	Create(NULL, _T("Home"), WS_OVERLAPPEDWINDOW, CRect(120, 100, 700, 480), NULL);
+	//THIS ALL ARE  USED FOR CUSTOMISATION OF THE WINDOWS LIKE DEFAULT COLOR,DEFAULT CURSOR,DEFAULT ICON ETC
+	//HCURSOR m_cursor = AfxGetApp()->LoadCursor(IDC_APP_CURS);
+	//HICON m_icon = AfxGetApp()->LoadIcon(IDI_ICON1);
+	
+	//LPCTSTR RWC = AfxRegisterWndClass(CS_VREDRAW|CS_HREDRAW, m_cursor, (HBRUSH)GetStockObject(WHITE_BRUSH),m_icon);
+	LPCTSTR RWC = AfxRegisterWndClass(CS_VREDRAW|CS_HREDRAW, NULL, (HBRUSH)GetStockObject(WHITE_BRUSH),NULL);
+	
+	//IT WILL LOAD THE SORTCUT KEY FOR THE MENU
+	m_Haccel =LoadAccelerators(AfxGetInstanceHandle(), MAKEINTRESOURCE(MAIN_ACCELARATOR));
+
+	Create(RWC, CString(MAKEINTRESOURCE(ID_EDIT_UNDO)), WS_OVERLAPPEDWINDOW, CRect(120, 100, 700, 480), NULL,MAKEINTRESOURCE(MAIN_MENU));
+	
+	//IT WILL DISABLE THE CURSOR
+	//ShowCursor(TRUE);
+
+	//set the custom cursor
+	//HCURSOR cursor = LoadCursor(NULL, MAKEINTRESOURCE(IDC_APP_CURS));
+	//SetCursor(cursor);
 }
 
 //destructor no code to the destructor
@@ -32,6 +51,7 @@ void CMainFrame::OnShowWindow(BOOL bShow, UINT nStatus)
 	CFrameWnd::OnShowWindow(bShow, nStatus);
 	
 	ShowWindow(SW_MAXIMIZE);
+	
 	
 }
 
@@ -152,6 +172,99 @@ void CMainFrame::OnDestroy()
 	//MessageBox(_T("Window will be destroyed"));
 }
 
+//THIS METHOD WILL HANDLING THE ALL INPUT FROM KEYBOARD YOU CAN CHECK THE NAME OF THE KEY USING WINDOWS REFRENCE
+void CMainFrame::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlag)
+{
+	/*CString msg;
+	switch(nChar)
+	{
+	case VK_RETURN:
+		msg.Format(L"ENTER KEY");
+		break;
+	case VK_F1:
+		msg.Format(L"F1 for Help");
+		break;
+	case VK_DELETE:
+		msg.Format(L"DEL FOR DELETE CONTENT");
+		break;
+	case VK_SHIFT:
+		msg.Format(L"SHIFT KEY");
+		break;
+	case VK_CONTROL:
+		msg.Format(L"CTRL KEY");
+		break;
+	default:
+		msg.Format(L"KEY PRESSED DONT KNOW THE NAME OF KEY");
+		break;
+	}
+	MessageBox(msg);*/
+}
+
+//THIS WILL USE FOR KEY UP EVENT HANDLING FOR DEFEENT BETWEEN KEYDOWN AND KEYUP PLEASE CHECK ONLINE DOCUMENTATION FOR IT
+void CMainFrame::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlag)
+{
+	CString msg;
+	switch (nChar)
+	{
+	case VK_INSERT:
+		msg.Format(L"INSERT KEY");
+		break;
+	default:
+		msg.Format(L"KEY PRESSED DONT KNOW THE NAME OF KEY");
+		break;
+	}
+	MessageBox(msg);
+}
+
+//FOR HANDLING THE LIFT CLICK OF THE MOUSE BUTTON
+void CMainFrame::OnLButtonDown(UINT nFlag, CPoint points)
+{
+	CString msg="This message has been send";
+	//msg.Format(_T("Left Button Down at Point X:%d,Y:%d"),points.x,points.y);
+	//MessageBox(msg);
+	SendMessage(WM_SETTEXT,(WPARAM)(LPCTSTR)msg);
+}
+//FOR HANDLING THE RIGHT CLICK OF THE MOUSE BUTTON
+void CMainFrame::OnRButtonDown(UINT nFlag, CPoint points)
+{
+	CString msg="hello";
+	/*msg.Format(_T("Right Button Down at Point X:%d,Y:%d"), points.x, points.y);
+	MessageBox(msg);*/
+	
+	PostMessage(WM_GETTEXT, (WPARAM)(LPCTSTR)msg);
+	MessageBox(msg);
+}
+
+void CMainFrame::OnMButtonDown(UINT nFlag, CPoint points)
+{
+	CString msg;
+	msg.Format(_T("Middle Button Down at Point X:%d,Y:%d"), points.x, points.y);
+	//MessageBox(msg);
+}
+
+void CMainFrame::OnLButtonDblClk(UINT nFlag, CPoint points)
+{
+	CString msg;
+	msg.Format(_T("Left Button DBLCLICK at Point X:%d,Y:%d"), points.x, points.y);
+	MessageBox(msg);
+}
+
+void CMainFrame::OnRButtonDblClk(UINT nFlag, CPoint points)
+{
+	CString msg;
+	msg.Format(_T("Right Button DBLCLICK at Point X:%d,Y:%d"), points.x, points.y);
+	MessageBox(msg);
+}
+
+void CMainFrame::OnMouseMove(UINT nFlag, CPoint points)
+{
+	CString msg;
+	msg.Format(_T("Mouse Move at Point X:%d,Y:%d"), points.x, points.y);
+	//MessageBox(msg);
+}
+
+
+
 //THIS MACRO DECLARATION WILL CREATE THE COMMUNICATION BETWEEN THE CMainFrame and CFrameWmd{base class of th CMainFrame header will declare in MainFrame.h file}
 //WE ALSO NEED TO DECLARE THAT MACRO WE DECLARED IT IN MainFrame.h HEADER FILE
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
@@ -162,6 +275,15 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_SIZE()//THIS WILL USE THE OnSize
 	ON_WM_SIZING()//THIS WILL USE THE OnSizing
 	ON_WM_DESTROY()//THIS WILL USE OnDestroy
+	ON_WM_KEYDOWN()//THIS WILL USE OnKeyDown
+	ON_WM_KEYUP()//THIS WILL USE OnKeyUp
+	ON_WM_LBUTTONDOWN()//THIS WILL USE OnLButtonDown
+	ON_WM_RBUTTONDOWN()//THIS WILL USE OnRButtonDown
+	ON_WM_MBUTTONDOWN()//THIS WILL USE OnMButtonDown
+	ON_WM_LBUTTONDBLCLK()//THIS WILL USE OnLButtonDblClk
+	ON_WM_RBUTTONDBLCLK()//THIS WILL USE OnRButtonDblClk
+	ON_WM_MOUSEMOVE()//THIS WILL USE OnMouseMove
+
 END_MESSAGE_MAP()
 
 //this class will show the windows behaviour
